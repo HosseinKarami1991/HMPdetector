@@ -1,0 +1,265 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3286029046/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3286029046.dir/build.make CMakeFiles/cmTryCompileExec3286029046.dir/build
+make[1]: Entering directory `/home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp'
+/home/barbara/Installed_software/CMake/cmake-2.8.12-Linux-i386/bin/cmake -E cmake_progress_report /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3286029046.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3286029046.dir/CheckSymbolExists.c.o   -c /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3286029046
+/home/barbara/Installed_software/CMake/cmake-2.8.12-Linux-i386/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3286029046.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec3286029046.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3286029046 -rdynamic 
+CMakeFiles/cmTryCompileExec3286029046.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld returned 1 exit status
+make[1]: Leaving directory `/home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec3286029046] Error 1
+make: *** [cmTryCompileExec3286029046/fast] Error 2
+
+File /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec530182780/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec530182780.dir/build.make CMakeFiles/cmTryCompileExec530182780.dir/build
+make[1]: Entering directory `/home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp'
+/home/barbara/Installed_software/CMake/cmake-2.8.12-Linux-i386/bin/cmake -E cmake_progress_report /home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec530182780.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec530182780.dir/CheckFunctionExists.c.o   -c /home/barbara/Installed_software/CMake/cmake-2.8.12-Linux-i386/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec530182780
+/home/barbara/Installed_software/CMake/cmake-2.8.12-Linux-i386/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec530182780.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec530182780.dir/CheckFunctionExists.c.o  -o cmTryCompileExec530182780 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: ld returned 1 exit status
+make[1]: Leaving directory `/home/barbara/Documents/HMPdetector/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec530182780] Error 1
+make: *** [cmTryCompileExec530182780/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1091218420/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1091218420.dir/build.make CMakeFiles/cmTryCompileExec1091218420.dir/build
+make[1]: Entering directory `/home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1091218420.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1091218420.dir/CheckSymbolExists.c.o   -c /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec1091218420
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1091218420.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec1091218420.dir/CheckSymbolExists.c.o  -o cmTryCompileExec1091218420 -rdynamic 
+CMakeFiles/cmTryCompileExec1091218420.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec1091218420] Error 1
+make[1]: Leaving directory `/home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1091218420/fast] Error 2
+
+File /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec352055367/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec352055367.dir/build.make CMakeFiles/cmTryCompileExec352055367.dir/build
+make[1]: Entering directory `/home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec352055367.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec352055367.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec352055367
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec352055367.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec352055367.dir/CheckFunctionExists.c.o  -o cmTryCompileExec352055367 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/kike/catkin_ws/src/HMPdetector/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec352055367] Error 1
+make: *** [cmTryCompileExec352055367/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4133044822/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4133044822.dir/build.make CMakeFiles/cmTryCompileExec4133044822.dir/build
+make[1]: Entering directory `/home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4133044822.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec4133044822.dir/CheckSymbolExists.c.o   -c /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec4133044822
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4133044822.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec4133044822.dir/CheckSymbolExists.c.o  -o cmTryCompileExec4133044822 -rdynamic 
+CMakeFiles/cmTryCompileExec4133044822.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec4133044822] Error 1
+make: *** [cmTryCompileExec4133044822/fast] Error 2
+
+File /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1961201268/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1961201268.dir/build.make CMakeFiles/cmTryCompileExec1961201268.dir/build
+make[1]: Entering directory `/home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1961201268.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec1961201268.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1961201268
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1961201268.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec1961201268.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1961201268 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/kike/catkin_ws/src/HMPdetector/src/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec1961201268] Error 1
+make: *** [cmTryCompileExec1961201268/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1477043259/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1477043259.dir/build.make CMakeFiles/cmTryCompileExec1477043259.dir/build
+make[1]: Entering directory `/home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1477043259.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1477043259.dir/CheckSymbolExists.c.o   -c /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec1477043259
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1477043259.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec1477043259.dir/CheckSymbolExists.c.o  -o cmTryCompileExec1477043259 -rdynamic 
+CMakeFiles/cmTryCompileExec1477043259.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec1477043259] Error 1
+make: *** [cmTryCompileExec1477043259/fast] Error 2
+
+File /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2159315787/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2159315787.dir/build.make CMakeFiles/cmTryCompileExec2159315787.dir/build
+make[1]: Entering directory `/home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2159315787.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec2159315787.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2159315787
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2159315787.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec2159315787.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2159315787 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/kike/Desktop/HMPdetectorbien/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec2159315787] Error 1
+make: *** [cmTryCompileExec2159315787/fast] Error 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec989105351/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec989105351.dir/build.make CMakeFiles/cmTryCompileExec989105351.dir/build
+make[1]: Entering directory `/home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec989105351.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec989105351.dir/CheckSymbolExists.c.o   -c /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec989105351
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec989105351.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec989105351.dir/CheckSymbolExists.c.o  -o cmTryCompileExec989105351 -rdynamic 
+CMakeFiles/cmTryCompileExec989105351.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory `/home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec989105351] Error 1
+make: *** [cmTryCompileExec989105351/fast] Error 2
+
+File /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1772198602/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1772198602.dir/build.make CMakeFiles/cmTryCompileExec1772198602.dir/build
+make[1]: Entering directory `/home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1772198602.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec1772198602.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1772198602
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1772198602.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec1772198602.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1772198602 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec1772198602] Error 1
+make[1]: Leaving directory `/home/nasa/catkin_ws/src/HMP/HMPdetector/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1772198602/fast] Error 2
+
+

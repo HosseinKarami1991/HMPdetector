@@ -1,0 +1,3 @@
+/home/kike/Desktop/HMPdetectorbien/libs/DspFilters/CMakeFiles/DspFilters.dir
+/home/kike/Desktop/HMPdetectorbien/libs/GMM+GMR/CMakeFiles/GMM+GMR.dir
+/home/kike/Desktop/HMPdetectorbien/CMakeFiles/HMPdetector.dir
