@@ -689,8 +689,8 @@ mat Classifier::socketTest(mat actualSample, mat window){
 		//Myfile1.close();
 		//Myfile2.close();
 
-		Myfile1.open ((DataLogPath2+"/99HMP_Possiblities.txt").c_str(),ios::app);
-		Myfile2.open ((DataLogPath2+"/99HMP_Action.txt").c_str(),ios::app);
+		Myfile1.open ((DataLogPath2+"/101HMP_Possiblities.txt").c_str(),ios::app);
+		Myfile2.open ((DataLogPath2+"/101HMP_Action.txt").c_str(),ios::app);
 		//time_hmp= duration_cast< microseconds >(system_clock::now().time_since_epoch());
 		 //sysTimeMS=time(0)*1000;
 		 gettimeofday(&tp, NULL);
