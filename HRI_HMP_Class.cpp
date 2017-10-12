@@ -66,6 +66,8 @@ void HRI_HMP_Class::hri_hmp_process(void){
 		parameterHMP[2]="Screwing";
 		parameterHMP[3]="PutDown";
 		parameterHMP[4]="ScrewingInitial";
+//		parameterHMP[5]="standing";
+
 	}
 	else if (parameterHMP[0]=="1")
 	{

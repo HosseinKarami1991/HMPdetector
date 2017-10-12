@@ -310,9 +310,22 @@ float Classifier::mahalanobisDist(int index,mat &trial,mat &model,cube &variance
 //! @return 			    Mahalanobis overall distance between trial and model
 float Classifier::compareOne(mat &Tgravity, mat &Tbody, DYmodel &MODEL)
 {
+	//***********************
+	// start: kourosh
+	// for online recognition using the lastest input data for recognition:
 	// extract the subwindow of interest from the trial (same size of the model)
-	mat gravity = Tgravity.rows(0, MODEL.size-1);
-	mat body = Tbody.rows(0, MODEL.size-1);
+
+	mat gravity = Tgravity.rows(window_size-MODEL.size, window_size-1);
+	mat body = Tbody.rows(window_size-MODEL.size, window_size-1);
+
+	// End: kourosh
+
+
+	// extract the subwindow of interest from the trial (same size of the model)
+//	mat gravity = Tgravity.rows(0, MODEL.size-1);
+//	mat body = Tbody.rows(0, MODEL.size-1);
+	//***********************
+
 
 	// acquire the relevant data from the model class
 	mat MODELgP = MODEL.gP;
@@ -643,9 +656,17 @@ mat Classifier::socketTest(mat actualSample, mat window){
 		const string ss2=asctime(timeinfo);
 		const char* DataLogPath=("/home/nasa/catkin_ws/src/HMPdetector/Datalog/"+ss2).c_str();
 		string DataLogPath2=(	"/home/nasa/catkin_ws/src/HMPdetector/Datalog/"+ss2).c_str();*/
-		const char* DataLogPath	="/home/nasa/Datalog/ICRA_TESTS";
-		string DataLogPath2		="/home/nasa/Datalog/ICRA_TESTS";
+		ofstream Myfile1;
+		ofstream Myfile2;
+		const char* DataLogPath	="/home/nasa/Datalog/AIIA/14";
+		string DataLogPath2		="/home/nasa/Datalog/AIIA/14";
 		mkdir(DataLogPath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		Myfile1.open ((DataLogPath2+"/20_Possibility.txt").c_str(),ios::app);
+
+		//Myfile1.open ((DataLogPath2+"/HMP_Possiblities.txt").c_str(),ios::trunc);
+		//Myfile2.open ((DataLogPath2+"/HMP_Action.txt").c_str(),ios::trunc);
+		//Myfile1.close();
+		//Myfile2.close();
 
 
 	mat gravity = zeros<mat>(window_size, 3);
@@ -666,10 +687,10 @@ mat Classifier::socketTest(mat actualSample, mat window){
 			
 		// report the possibility values in the results file
 //		cout<<"Possiblity:  ";
-		for (int i = 0; i < nbM; i++)
-		{
+//		for (int i = 0; i < nbM; i++)
+//		{
 //			cout<<possibilities[i] <<" ";
-		}
+//		}
 //		cout<<endl;
 		
 		// Publishing the possibilities, the out out of HMPdetector
@@ -682,15 +703,8 @@ mat Classifier::socketTest(mat actualSample, mat window){
 //		ROS_INFO("Ros Publish: %s", msg_estOutput.data.c_str());
 		pub_estOutput.publish(msg_estOutput);
 
-		ofstream Myfile1;
-		ofstream Myfile2;
-		//Myfile1.open ((DataLogPath2+"/HMP_Possiblities.txt").c_str(),ios::trunc);
-		//Myfile2.open ((DataLogPath2+"/HMP_Action.txt").c_str(),ios::trunc);
-		//Myfile1.close();
-		//Myfile2.close();
 
-		Myfile1.open ((DataLogPath2+"/101HMP_Possiblities.txt").c_str(),ios::app);
-		Myfile2.open ((DataLogPath2+"/101HMP_Action.txt").c_str(),ios::app);
+//		Myfile2.open ((DataLogPath2+"/73HMP_Action.txt").c_str(),ios::app);
 		//time_hmp= duration_cast< microseconds >(system_clock::now().time_since_epoch());
 		 //sysTimeMS=time(0)*1000;
 		 gettimeofday(&tp, NULL);
@@ -698,41 +712,46 @@ mat Classifier::socketTest(mat actualSample, mat window){
 
 		 //cout << setprecision(13);
 		 //cout<<ms0<<endl;
-		if (possibilities[0]>possibilities[1] && possibilities[0]>possibilities[2] && possibilities[0]>possibilities[3] )
-		{	
-//		cout<<"PIckUp"<<endl<<endl;
-		Myfile1 <<ms0<<" "<<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
-		Myfile2 <<ms0<<" "<<"PIckUp"<<"\n";
-		}
-		else if (possibilities[1]>possibilities[0] && possibilities[1]>possibilities[2] && possibilities[1]>possibilities[3] )
-		{
-//		cout<<"Screwing"<<endl<<endl;
-		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
-		Myfile2 <<ms0<<" "<<"Screwing"<<"\n";
-		}
-	
-		else if (possibilities[2]>possibilities[0] && possibilities[2]>possibilities[1] && possibilities[2]>possibilities[3] )
-		{
-//		cout<<"PutDown"<<endl<<endl;
-		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
-		Myfile2 <<ms0<<" "<<"PutDown"<<"\n";
-		}
 
-		else if (possibilities[3]>possibilities[0] && possibilities[3]>possibilities[1] && possibilities[3]>possibilities[2] )
-		{
-//		cout<<"ScrewingInitial"<<endl<<endl;
-		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
-		Myfile2 <<ms0<<" "<<"ScrewingInitial"<<"\n";
-		}
-
-		else 
-		{
-//		cout<<"Non of the Actions"<<endl<<endl;
-		Myfile1 <<ms0<<" "<<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
-		Myfile2 <<ms0<<" "<< "Non of the Actions"<<"\n";
-		}
+		 Myfile1 <<ms0<<" ";
+		 for (int i=0;i<nbM;i++)
+			 Myfile1 <<possibilities[i]<<" ";
+		 Myfile1 <<"\n";
+//		if (possibilities[0]>possibilities[1] && possibilities[0]>possibilities[2] && possibilities[0]>possibilities[3] )
+//		{
+////		cout<<"PIckUp"<<endl<<endl;
+//		Myfile1 <<ms0<<" "<<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
+//		Myfile2 <<ms0<<" "<<"PIckUp"<<"\n";
+//		}
+//		else if (possibilities[1]>possibilities[0] && possibilities[1]>possibilities[2] && possibilities[1]>possibilities[3] )
+//		{
+////		cout<<"Screwing"<<endl<<endl;
+//		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
+//		Myfile2 <<ms0<<" "<<"Screwing"<<"\n";
+//		}
+//
+//		else if (possibilities[2]>possibilities[0] && possibilities[2]>possibilities[1] && possibilities[2]>possibilities[3] )
+//		{
+////		cout<<"PutDown"<<endl<<endl;
+//		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
+//		Myfile2 <<ms0<<" "<<"PutDown"<<"\n";
+//		}
+//
+//		else if (possibilities[3]>possibilities[0] && possibilities[3]>possibilities[1] && possibilities[3]>possibilities[2] )
+//		{
+////		cout<<"ScrewingInitial"<<endl<<endl;
+//		Myfile1 <<ms0<<" "<< possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
+//		Myfile2 <<ms0<<" "<<"ScrewingInitial"<<"\n";
+//		}
+//
+//		else
+//		{
+////		cout<<"Non of the Actions"<<endl<<endl;
+//		Myfile1 <<ms0<<" "<<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3]<<"\n";
+//		Myfile2 <<ms0<<" "<< "Non of the Actions"<<"\n";
+//		}
 		Myfile1.close();
-		Myfile2.close();
+//		Myfile2.close();
 	}
 	return window;
 
