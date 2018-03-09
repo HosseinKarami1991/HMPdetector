@@ -39,7 +39,7 @@ std::queue<string> data_socket;
 unsigned int window_size = 0;
 
 Device* dev = new GwatchR("LG G watch R");
-string dF = "HRIGestures";
+string dF = "iros2018_2";//HRIGestures
 Publisher* p = new LogFile("log.txt");
 Classifier *oneClassifier = NULL;
 mat window;

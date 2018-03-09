@@ -125,13 +125,23 @@ mat ChebyshevFilter(mat matrix)
 	float **floatMatrix = matToFloat(matrix);
 	Dsp::SimpleFilter<Dsp::ChebyshevI::LowPass<5>,3> filter;
 	int filterOrder = 2;
-	int samplingFreq = 32;
+	int samplingFreq = 44;
 	float cutFreq = 0.25;
 	float passRipple = 0.001;
+
+//	cout<<"ChebyshevFilter: floatMatrix"<<endl;
+//	for (int i = 0; i < matrix.n_rows; i++)
+//	{
+//		for (int j = 0; j < matrix.n_cols; j++)
+//			cout<< floatMatrix[i][j]<<" ";
+//		cout<<endl;
+//	}
 
 	filter.setup(filterOrder, samplingFreq, cutFreq, passRipple);
 	filter.process(matrix.n_cols, floatMatrix);
 	mat lowpassComponent = floatToMat(floatMatrix, matrix.n_rows, matrix.n_cols);
+//	cout<<"ChebyshevFilter: gravity "<<endl;
+//	lowpassComponent.print();
 
 	return lowpassComponent;
 }

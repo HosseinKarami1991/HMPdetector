@@ -104,23 +104,39 @@ void Creator::getFeatures(string name, int nTr, mat &totGravity, mat &totBody)
         ifstream trialFile(fileName.c_str());
         for (string line; std::getline(trialFile, line); )
         {
-            //DEBUG:cout<<"Line: " <<line <<endl;
+//            DEBUG:cout<<"Line: " <<line <<endl;
             mat actualSample;
             actualSample = driver->extractActual(line);
             createSet(actualSample, set);
         }
-        
+//        std::cout<<"Set:"<<std::endl;
+//        set.print();
+
 		// reduce the noise on the sets by median filtering
 		int size = 3;
 		mat clean_set = set.t();
 		medianFilter(clean_set, size);
 		clean_set = clean_set.t();
 
+//		std::cout<<"clean_set"<<std::endl;
+//		clean_set.print();
+
 		// separate gravity and body acc. by Chebyshev II low-pass filtering
 		mat tempgr = clean_set.t();
 		gravity = ChebyshevFilter(tempgr);
+
+//		std::cout<<"gravity"<<std::endl;
+//		gravity.print();
+
 		gravity = gravity.t();
 		body = clean_set - gravity;
+
+
+//		std::cout<<"gravity"<<std::endl;
+//		gravity.print();
+//		std::cout<<"body"<<std::endl;
+//		body.print();
+
 
 		// create the datasets
 		mat time = createInterval(1, gravity.n_rows);
@@ -147,6 +163,8 @@ void Creator::generateModel(STmodel &motion)
 	// create the gravity and body acc. datasets
 	cout<<endl <<"Creating the gravity and body acceleration datasets" <<endl;
 	getFeatures(motion.name, motion.nbModellingTrials, totGravity, totBody);
+	std::cout<<"totGravity"<<std::endl;
+	totGravity.print();
 
 	// create the GMM+GMR model of the gravity component
 	{
@@ -228,18 +246,18 @@ void Creator::generateAllModels()
 		int one_nbMT;
 		int one_nbGG;
 		int one_nbBG;
-
+		cout<<"****************************"<<endl;
 		string fileName = datasetFolder + "HMPconfig.txt";
-		//DEBUG:cout<<"config file: " <<fileName <<endl;
+		cout<<"config file: " <<fileName <<endl;
 		ifstream configFile(fileName.c_str());
 		while (!configFile.eof())
 		{
 			configFile>>one_n >>one_nbMT >>one_nbGG >>one_nbBG;
 			if (!configFile)
 				break;
-			//DEBUG:cout<<"Generating model: " <<one_n <<endl;
+			cout<<"Generating model: " <<one_n <<endl;
 			STmodel one_HMP(one_n,one_nbMT,one_nbGG,one_nbBG);
-			//DEBUG:one_HMP.printInfo();
+			one_HMP.printInfo();
 			generateModel(one_HMP);
 		}
 		configFile.close();

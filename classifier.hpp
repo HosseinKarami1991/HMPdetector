@@ -105,7 +105,7 @@ class Classifier
 		void singleTest(string testFile, string resultFile);
 		// Acecess to node:
 		ros::NodeHandle nh;		
-		ros::Publisher pub_estOutput = nh.advertise<std_msgs::String>("HMPOutput", 1);
+		ros::Publisher pub_estOutput;
 //		long double sysTimeMS;
 		struct timeval tp;
 		unsigned long int ms0 ;

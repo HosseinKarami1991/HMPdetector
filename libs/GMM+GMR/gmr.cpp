@@ -245,6 +245,7 @@ void GaussianMixture::initEM_TimeSplit(int nState, Matrix DataSet) {
 	 time (first dimension) slices and computing variances
 	 and means for each slices.
 	 once initialisation has been performed, the nb of state is set */
+//	std::cout<<"GaussianMixture::initEM_TimeSplit "<<std::endl;
 	Vector * mean = new Vector[nState];
 	int nData = DataSet.RowSize();
 	this->nState = nState;
@@ -297,7 +298,11 @@ void GaussianMixture::initEM_TimeSplit(int nState, Matrix DataSet) {
 		}
 		sigma[s] *= 1.0f / pop[s];
 		sigma[s] += unity * 1e-5f; /* prevents this matrix from being non-inversible */
+//		std::cout<<"sigma: "<<std::endl;
+//		sigma[s].Print();
 	}
+
+//	mu.Print();
 
 }
 
@@ -318,6 +323,15 @@ int GaussianMixture::doEM(Matrix DataSet) {
 		unity(k, k) = 1.0;
 
 	//EM loop
+//	std::cout<<"**** GaussianMixture::doEM 1 "<<std::endl;
+//	std::cout<<"nData "<<nData<<std::endl;
+//
+//	std::cout<<"mu: "<<std::endl;
+//	mu.Print();
+//	std::cout<<"sigma: "<<std::endl;
+//	sigma[0].Print();
+//	std::cout<<"prior: "<<priors[0]<<std::endl;
+
 
 	while (true) {
 		float * sum_p = new float[nData];
@@ -332,6 +346,16 @@ int GaussianMixture::doEM(Matrix DataSet) {
 
 		iter++;
 		if (iter > MAXITER) {
+//			std::cout<<"**** GaussianMixture::doEM 2 "<<std::endl;
+//			std::cout<<"mu: "<<std::endl;
+//			mu.Print();
+//			std::cout<<"sigma: "<<std::endl;
+//			sigma[0].Print();
+//			std::cout<<"prior: "<<priors[0]<<std::endl;
+//			std::cout<<"pix: "<<std::endl;
+//			pix.Print();
+
+
 			std::cout
 					<< "EM stops here. Max number of iterations has been reached."
 					<< std::endl;
@@ -344,7 +368,7 @@ int GaussianMixture::doEM(Matrix DataSet) {
 		for (int i = 0; i < nData; i++) {
 			sum_p[i] = 0;
 			for (int j = 0; j < nState; j++) {
-				float p = pdfState(DataSet.GetRow(i), j);  // P(x|i)
+				double p = pdfState(DataSet.GetRow(i), j);  // P(x|i)
 				if (p == 0) {
 					std::cout << p << std::endl;
 					std::cout << "Error: Null probability. Abort.";
@@ -352,15 +376,19 @@ int GaussianMixture::doEM(Matrix DataSet) {
 					return -1;
 				}
 				pxi(i, j) = p;
+//				std::cout<<	"1-1: "<<	sum_p[i]<<" "<<p <<" "<< priors[j]<<std::endl;
 				sum_p[i] += p * priors[j];
+//				std::cout<<	"1-2: "<<	sum_p[i]<<std::endl;
 			}
 			sum_log += log(sum_p[i]);
 		}
+//		std::cout<<	"1: "<<	pix(0, 0)<< "="<< pxi(0, 0)<<" * "<< priors[0]<<" / "  <<sum_p[0]<<std::endl; // then P(i|x)
 		for (int j = 0; j < nState; j++) {
 			for (int i = 0; i < nData; i++) {
 				pix(i, j) = pxi(i, j) * priors[j] / sum_p[i]; // then P(i|x)
 			}
 		}
+//		std::cout<<	"2: "<<	pix(0, 0)<< "="<< pxi(0, 0)<<" * "<< priors[0]<<" / "  <<sum_p[0]<<std::endl; // then P(i|x)
 
 		// here we compute the log likehood
 		log_lik = sum_log / nData;
@@ -374,9 +402,13 @@ int GaussianMixture::doEM(Matrix DataSet) {
 		log_lik_old = log_lik;
 
 		// Update Step
+//		std::cout<<"pix:("<<iter<<")"<<std::endl;
+//		pix.Print();
+
 		pix.SumRow(E);
 		for (int j = 0; j < nState; j++) {
 			priors[j] = E(j) / nData; // new priors
+//			std::cout<<"priors["<<j<<"] = "<<E(j)<<" / "<<nData<<std::endl;
 			Vector tmu(dim);
 			Matrix tmsigma(dim, dim);
 			for (int i = 0; i < nData; i++) // Means update loop
@@ -404,10 +436,21 @@ float GaussianMixture::pdfState(Vector Vin, int state) {
 	double p;
 	Vector dif;
 	sigma[state].Inverse(inv_sigma, &det_sigma);
+//	std::cout<<"sigma[state]"<<std::endl;
+//	sigma[state].Print();
+//	std::cout<<"inv_sigma"<<std::endl;
+//	inv_sigma.Print();
+//	std::cout<<"det_sigma: "<<det_sigma<<std::endl;
+
+
+
+
 	if (sigma[state].IsInverseOk()) {
 		dif = Vin - mu.GetRow(state);
 		p = (double) (dif * (inv_sigma * dif));
+//		std::cout<<"pdfState1: "<<p <<" "<< dif(0)<< "*"<< "("<<inv_sigma(0,0) <<"*"<< dif(0)<<"))"<<std::endl;
 		p = exp(-0.5 * p) / sqrt(pow(2 * 3.14159, dim) * fabs(det_sigma));
+//		std::cout<<"pdfState2: "<< p <<" " << exp(-0.5 * p) << " / " << pow(2 * 3.14159, dim) << " * " << fabs(det_sigma)<<std::endl;
 		if (p < 1e-40)
 			return 1e-40f;
 		else

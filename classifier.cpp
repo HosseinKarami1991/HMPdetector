@@ -190,6 +190,7 @@ void DYmodel::build(string HMPn, float gW, float bW, float th)
 //! @param[in] p    interface for the publishing middleware
 Classifier::Classifier(string dF, Device* dev, Publisher* p)
 {
+	pub_estOutput = nh.advertise<std_msgs::String>("HMPOutput", 1);
 	string one_HMPn;
 	float one_gW;
 	float one_bW;
@@ -380,9 +381,11 @@ void Classifier::compareAll(mat &gravity,mat &body, vector<float> &possibilities
 	// compute the possibilities from the trial_to_model distances
 	for(int i = 0; i < nbM; i++)
 	{
+
 		possibilities[i] = 1 - (distance[i] / set[i].threshold);
 		if (possibilities[i] < 0)
 			possibilities[i] = 0;
+//		cout<<possibilities[i]<<", "<<distance[i]<<", "<<set[i].threshold<<endl;
 	}
 }
 
@@ -658,10 +661,10 @@ mat Classifier::socketTest(mat actualSample, mat window){
 		string DataLogPath2=(	"/home/nasa/catkin_ws/src/HMPdetector/Datalog/"+ss2).c_str();*/
 		ofstream Myfile1;
 		ofstream Myfile2;
-		const char* DataLogPath	="/home/nasa/Datalog/AIIA/14";
-		string DataLogPath2		="/home/nasa/Datalog/AIIA/14";
+		const char* DataLogPath	="/home/nasa/Datalog/IROS/HAR/1";
+		string DataLogPath2		="/home/nasa/Datalog/IROS/HAR/1";
 		mkdir(DataLogPath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-		Myfile1.open ((DataLogPath2+"/20_Possibility.txt").c_str(),ios::app);
+		Myfile1.open ((DataLogPath2+"/Possibility.txt").c_str(),ios::app);
 
 		//Myfile1.open ((DataLogPath2+"/HMP_Possiblities.txt").c_str(),ios::trunc);
 		//Myfile2.open ((DataLogPath2+"/HMP_Action.txt").c_str(),ios::trunc);
@@ -671,10 +674,10 @@ mat Classifier::socketTest(mat actualSample, mat window){
 
 	mat gravity = zeros<mat>(window_size, 3);
 	mat body = zeros<mat>(window_size, 3);
-
+//	cout<<"nbm: "<<nbM<<endl;
 	// initialize the possibilities
 	for (int i = 0; i < nbM; i++)
-		possibilities.push_back(0);
+		possibilities.push_back(0.0);
 
 	createWindow(actualSample, window, window_size, nSamples);
 
@@ -684,7 +687,8 @@ mat Classifier::socketTest(mat actualSample, mat window){
 	{
 		analyzeWindow(window, gravity, body);
 		compareAll(gravity, body, possibilities);
-			
+
+
 		// report the possibility values in the results file
 //		cout<<"Possiblity:  ";
 //		for (int i = 0; i < nbM; i++)
@@ -698,7 +702,7 @@ mat Classifier::socketTest(mat actualSample, mat window){
 	//	ros::Publisher pub_estOutput = nh.advertise<std_msgs::String>("HMPOutput", 1);
 		std_msgs::String msg_estOutput;
 		std::stringstream ss_estOutput;
-		ss_estOutput <<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<possibilities[3];
+		ss_estOutput <<possibilities[0]<<" "<<possibilities[1]<<" "<<possibilities[2]<<" "<<0.0;
 		msg_estOutput.data = ss_estOutput.str();
 //		ROS_INFO("Ros Publish: %s", msg_estOutput.data.c_str());
 		pub_estOutput.publish(msg_estOutput);
