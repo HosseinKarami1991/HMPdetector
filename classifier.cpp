@@ -661,8 +661,8 @@ mat Classifier::socketTest(mat actualSample, mat window){
 		string DataLogPath2=(	"/home/nasa/catkin_ws/src/HMPdetector/Datalog/"+ss2).c_str();*/
 		ofstream Myfile1;
 		ofstream Myfile2;
-		const char* DataLogPath	="/home/nasa/Datalog/IROS/HAR/1";
-		string DataLogPath2		="/home/nasa/Datalog/IROS/HAR/1";
+		const char* DataLogPath	="/home/nasa/Datalog/ROMAN2018/0";
+		string DataLogPath2		="/home/nasa/Datalog/ROMAN2018/0";
 		mkdir(DataLogPath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 		Myfile1.open ((DataLogPath2+"/Possibility.txt").c_str(),ios::app);
 
