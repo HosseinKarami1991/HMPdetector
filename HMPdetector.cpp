@@ -14,9 +14,9 @@
 #include "string.h"
 #include "std_msgs/Int32.h"
 #include "std_msgs/String.h"
+#include "sensor_msgs/Imu.h"
 #include "geometry_msgs/Pose.h"
 #include <sstream>
-
 #include "creator.hpp"
 #include "classifier.hpp"
 #include "device.hpp"
@@ -50,12 +50,12 @@ mat actualSample;				// current sample in matrix format
 
 //Enrique: callback
 int jj=0;
-void socketCallback(geometry_msgs::Pose msg)
+void socketCallback(sensor_msgs::Imu msg)
 {
 
-	float x = msg.position.x;
-	float y = msg.position.y;
-	float z = msg.position.z;
+	float x = msg.linear_acceleration.x;
+	float y = msg.linear_acceleration.y;
+	float z = msg.linear_acceleration.z;
 //	ROS_INFO("I received: [%f, %f, %f]", x,y,z);
 	actualSample = dev->fillActual(x,y,z);
 	window = oneClassifier->socketTest(actualSample,window);
@@ -286,7 +286,7 @@ int main(int argc, char* argv[])
 	// retrieve & execute the chosen option
     //!\todo make it possible to have multiple iterations
 	char c;
-		string DataLogPath2	="/home/nasa/catkin_ws/src/HMPdetector/Datalog/4";		
+		string DataLogPath2	="/home/hossein/catkin_ws/src/HMPdetector/Datalog/4";		
 		ofstream Myfile1;
 		ofstream Myfile2;
 		Myfile1.open ((DataLogPath2+"/HMP_Possiblities.txt").c_str(),ios::trunc);
@@ -337,7 +337,7 @@ int main(int argc, char* argv[])
 				window = zeros<mat>(window_size, 3);
 				//Define the subscriber to person's gesture
 				ros::Subscriber sub = nh.subscribe
-				("/wearami_acc", 1, socketCallback);//wearami_socket
+				("/G_Watch_R/imu_data", 1, socketCallback);//wearami_socket
 				
 
 
